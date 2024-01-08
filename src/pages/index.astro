@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/about/Hero.astro";
+import Contact from '../components/Contact.jsx'
+import "../styles/home.css";
+import Technologies from '../components/about/Technologies.astro'
+import TimeLine from "../components/TimeLine.astro";
+
+
+import Portfolio from "../components/portfolio/Portfolio.astro"
+import SkillsArea from "../components/about/SkillsArea.astro";
+import Social from "../components/about/Social.astro";
+
+
+const hero= 'div'
+---
+
+<Layout title="Portfolio David Mas-Bagà">
+  <div class="outer">
+    <div class="home panel">
+      <p class="panel-tag font-semibold tracking-tighter">ABOUT</p>
+
+      <div class="content pl-20 m-auto flex flex-wrap">
+        
+        <Hero/> 
+        
+        <Technologies/>
+        <SkillsArea/>
+        
+        
+      </div>
+    </div>
+
+    <div class="one panel">
+      <p class="panel-tag font-semibold tracking-wider text-white">EXPERIENCE</p>
+      <div class="content xl:max-w-7xl mx-5 max-w-4xl xl:m-auto flex">
+        <TimeLine />
+      </div>
+    </div>
+
+    <div class="two panel bg-accent">
+      <p class="panel-tag font-semibold tracking-wider">PORTFOLIO</p>
+      <div class="content">
+<Portfolio/>
+
+
+
+      </div>
+    </div>
+
+    <div class="three panel">
+      <p class="panel-tag font-semibold tracking-wider text-white ">CONTACT</p>
+      <div class="content">
+       
+      <Contact client:load/>
+      <Social/>
+      </div>
+    </div>
+  </div>
+
+
+
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", (event) => {
+    const panels = document.querySelectorAll(".panel");
+
+    function deactivateAllPanels() {
+      panels.forEach((panel) => {
+        panel.classList.remove("active");
+      });
+    }
+
+    panels.forEach((panel) => {
+      panel.addEventListener("click", function (e) {
+        
+        e.stopPropagation();
+
+        deactivateAllPanels();
+        this.classList.add("active");
+        
+      });
+    });
+
+   
+    document
+      .querySelectorAll(".panel button, .panel form")
+      .forEach((element) => {
+        element.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+      });
+
+    const homePanel = document.querySelector(".home");
+    if (homePanel) {
+      homePanel.classList.add("active");
+    }
+  });
+</script>

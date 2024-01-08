@@ -1,0 +1,84 @@
+[
+  {
+    "project": "JobLink",
+    "technologies": [
+      "React",
+      "Express",
+      "MongoDB"
+    ],
+    "description": "Master's Final Project. A social network that emulates Linkedin. Follows, posts, likes, admin panel, creation of companies and jobs, etc...",
+    "image": "https://res.cloudinary.com/dkxlwv844/image/upload/v1703860620/PortFolio/joblink_lits7x.jpg",
+    "github": "https://github.com/davidmasbaga/jobLink",
+    "url": "https://job-link.netlify.app/",
+    "alt": "Joblink App",
+    "online": true
+  },
+  {
+    "project": "Aisw IA SEO TOOLS",
+    "technologies": [
+      "NextJs",
+      "Express",
+      "mongo DB",
+      "TailwindCss"
+    ],
+    "description": "Tool connected to Open AI API. WiThis tool optimizes SEO agency processes such as keyword categorization, keyword clustering, product categorization, generation of structured data markers, creation of content briefing, etc...",
+    "image": "https://res.cloudinary.com/dkxlwv844/image/upload/v1704188950/PortFolio/aisw_lvpwko.jpg",
+    "alt": "Ia SEO TOOL",
+    "url": "https://aiswtool.netlify.app/",
+    "github": "https://github.com/davidmasbaga/aisw",
+    "online": true
+  },
+  {
+    "project": "Notion Quick Notes",
+    "technologies": [
+      "NextJs",
+      "TailwindCss"
+    ],
+    "description": "Tool connected to a notion database. With it, we can send via Api, quick notes to our notion without using the original application. Made in NextJs, Tailwind and login with github in NextAuth.",
+    "image": "https://res.cloudinary.com/dkxlwv844/image/upload/v1704179544/PortFolio/notestonotion_j14jjc.jpg",
+    "alt": "SeoTool",
+    "url": "https://notion-quick-qj2j.vercel.app/",
+    "github": "https://github.com/davidmasbaga/notion_quick",
+    "online": true
+  },
+  {
+    "project": "Prompt Generator",
+    "technologies": [
+      "NextJs",
+      "TailwindCss"
+    ],
+    "description": "Prompt Generator is a tool designed for marketing professionals. It simplifies content creation by offering tailored prompts based on selected categories, roles, and desired language and tone.",
+    "image": "https://res.cloudinary.com/dkxlwv844/image/upload/v1704190060/PortFolio/prompt-generator_md9ao4.jpg",
+    "alt": "Prompt Generator",
+    "url": "https://prompt-generator-xi.vercel.app/",
+    "github": "https://github.com/davidmasbaga/Prompt-Generator",
+    "online": true
+  },
+
+  {
+    "project": "SeoTool",
+    "technologies": [
+      "NextJs",
+      "TailwindCss",
+      "Puppeteer"
+    ],
+    "description": "All in one SEO tool.Google People Also Ask Scraper, Google Suggest Scraper, KW Clustering, URL data info (Headings, title) and more",
+    "image": "https://res.cloudinary.com/dkxlwv844/image/upload/v1703863838/PortFolio/SeoTool_ycnqrc.jpg",
+    "alt": "SeoTool",
+    "github": "https://github.com/davidmasbaga/toolseo",
+    "online": false
+  },
+  {
+    "project": "Gato Sin Pelo",
+    "technologies": [
+      "Astro",
+      "TailwindCss"
+    ],
+    "description": "Gatosinpelo is a blog, originally created in WordPress for experimentation purposes and later migrated to Astro using contentCollections. This allows for dynamic display of content in MDX format. ",
+    "image": "https://res.cloudinary.com/dkxlwv844/image/upload/v1704190510/PortFolio/gatosinpelo_xx4ewt.jpg",
+    "alt": "gatosinpelo",
+    "url": "https://gatosinpelo.com/",
+    "github": "https://github.com/davidmasbaga/gatosinpelo",
+    "online": true
+  }
+]

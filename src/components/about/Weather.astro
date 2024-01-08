@@ -1,0 +1,88 @@
+---
+import { kelvinToCelsius, getHour } from "../../lib/utils";
+
+const weather_api_key = import.meta.env.WEATHER_API_KEY;
+
+const lat = "41.388";
+const lon = "2.1589";
+
+
+const response = await fetch(
+  `https://api.openweathermap.org/data/2.5/weather?lat=${
+    lat
+  }&lon=${lon}&appid=${weather_api_key}`
+);
+
+const weatherData = await response.json();
+// const weatherData=''
+---
+
+<!-- Aquí escribes tu HTML -->
+<div class="weather-container">
+  {
+    weatherData ? (
+      <div class="">
+        <p class="serif xl:text-8xl tracking-normal mb-2">
+          Barcelona
+        </p>
+        <div class="flex gap-4 ">
+          <p class="serif xl:text-4xl">
+            {kelvinToCelsius(weatherData.main.temp)}º{" "}
+          </p>
+          <p class="serif xl:text-4xl text-accent ">
+            {" "}
+            Sky {weatherData.weather[0].main}{" "}
+          </p>
+          <p class="serif xl:text-6xl">
+            {getHour()}h
+          </p>
+        </div>
+      </div>
+    ) : (
+      <p>Cargando datos...</p>
+    )
+  }
+
+  <svg class="circles" width="900" height="900" viewBox="0 0 200 200">
+    <circle
+      cx="100"
+      cy="100"
+      r="90"
+      stroke="gray"
+      stroke-width="0.1"
+      fill="none"></circle>
+    <circle cx="80" cy="60" r="50" stroke="gray" stroke-width="0.5" fill="none"
+    ></circle>
+    <circle
+      cx="120"
+      cy="80"
+      r="60"
+      stroke="#c8ff00"
+      stroke-width="0.3"
+      fill="none"></circle>
+  </svg>
+</div>
+
+<style>
+  .weather-container {
+    position: relative;
+  }
+
+  .circles {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(80%, -70%);
+    z-index: -10;
+  }
+
+  @media (max-width: 1279px) {
+    .weather-container  {
+      display: none;
+    }
+ 
+  
+    
+  }
+
+</style>

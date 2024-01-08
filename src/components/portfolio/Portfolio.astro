@@ -1,0 +1,57 @@
+---
+import Card from "./Card.astro";
+import projects from "../../data/portfolio.json";
+
+
+---
+
+<section class="portfolio-container mx-auto xl:w-3/4 mb-20">
+  <h2 class="font-bold xl:text-7xl text-4xl my-20 xl:ml-10 text-center">Portfolio</h2>
+  <div class="flex flex-wrap justify-center gap-5 xl:ml-10">
+    {
+      projects.map((project) => (
+        <Card
+          alt={project.alt}
+          image={project.image}
+          title={project.project}
+          description={project.description}
+          badgeContent={project.technologies}
+          showWebSite={project.online}
+          url={project.url}
+          gitHub={project.github}
+        />
+      ))
+    }
+
+    <!-- <Card alt={projects[0].alt}   image={projects[0].image} title={projects[0].project} description={projects[0].description} badgeContent={projects[0].technologies} />
+<Card title='Seo Tool' description="Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles, pero la mayoría sufrió alteraciones en alguna manera, ya sea porque se le agregó humor, o palabras aleatorias que no parecen ni un poco creíbles. Si vas a utilizar un pasaje de Lorem Ipsum, necesitás estar seguro de que no hay nada avergonzante escondido en el medio del texto."/> -->
+ 
+<!--     
+    <Card title="Automated Blog Template" />
+    <Card title="Two Little Draws"  showWebSite="true"/>
+    <Card title="David Mas-Bagà" /> -->
+  </div>
+</section>
+
+<svg class="circles" width="900" height="900" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="90" stroke="gray" stroke-width="0.2" fill="none"
+  ></circle>
+  <circle cx="80" cy="60" r="50" stroke="gray" stroke-width="0.1" fill="none"
+  ></circle>
+  <circle cx="120" cy="80" r="60" stroke="gray" stroke-width="0.1" fill="none"
+  ></circle>
+</svg>
+
+<style>
+  .portfolio-container {
+    position: relative;
+  }
+
+  .circles {
+    position: absolute;
+    top: 30%;
+    right: 90%;
+    transform: translate(80%, -70%);
+    z-index: -10;
+  }
+</style>

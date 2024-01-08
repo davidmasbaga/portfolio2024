@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+  }
+
+  .outer {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    
+    overflow: scroll;
+  }
+
+  .panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 4%;
+    
+    transition: all 0.5s ease;
+    .panel-tag {
+      transform: rotate(90deg);
+      transform-origin: 1;
+      transition: all 1s ease;
+      padding-left: 3rem;
+    }
+  }
+
+
+  .home {
+	background: #c7c7c7;
+    
+    z-index: 10;
+  }
+  .one {
+	background: #1a1a1a;
+    
+    z-index: 75;
+    p .panel-tag {
+      margin-bottom: 30em;
+    }
+  }
+  .two {
+    /* background: #C8FF00; */
+    z-index: 50;
+  }
+  .three {
+    background: #444444;
+    z-index: 25;
+  }
+
+  .active {
+    width: 88%;
+  }
+
+  .panel .content {
+    display: none;
+  }
+
+  .panel:hover{
+    cursor: cell;
+  }
+  .panel.active .content {
+    display: block;
+    cursor:default/* Muestra el contenido cuando el panel está activo */
+  }
+
+
+  /* Media query para dispositivos móviles */
+  @media (max-width: 768px) {
+    .outer {
+      flex-direction: column;
+      flex-wrap: nowrap; /* Asegúrate de que no haya envoltura de flex */
+      overflow: auto; /* Ajusta el desbordamiento si es necesario */
+      height: 100vh; /* Permite que el contenedor crezca con el contenido */
+    }
+  
+    .panel {
+      width: 100%; /* Ocupa todo el ancho disponible */
+      min-height: auto; /* Ajusta la altura mínima */
+      
+      transition: all 0.5s ease;
+    }
+  
+    .panel .panel-tag {
+      transform: rotate(0deg);
+      padding-left: 0px;
+      padding-top: 1rem; /* Ajusta según sea necesario */
+    }
+  
+    .active {
+      flex-grow: 0; 
+      height: auto; 
+      .panel-tag{
+        display: none;
+      }
+    }
+  
+    .panel .content {
+      display: none;
+    }
+    
+  
+    .panel.active .content {
+      display: block; /* Muestra el contenido cuando el panel está activo */
+    }
+
+    .content{
+        padding:2rem
+    }
+    .three {
+      flex-grow: 1; /* Permite que el panel crezca para ocupar el espacio disponible */
+      display: flex; /* Establece el panel como un contenedor flex */
+      flex-direction: column; /* Ordena los elementos internos en una columna */
+      justify-content: space-between; /* Distribuye el espacio al inicio y al final */
+    }
+  
+ 
+  
+    
+  }
