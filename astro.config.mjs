@@ -8,5 +8,6 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   env:{
     REACT_APP_SECRET_PASSWORD: import.meta.env.PUBLIC_SECRET_PASSWORD,
+    PUBLIC_URL_API:import.meta.env.PUBLIC_URL_API
   }
 });

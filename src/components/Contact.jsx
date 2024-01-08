@@ -3,6 +3,10 @@ import { useState } from "react";
 
 function ContactForm() {
   const ownApiKey = import.meta.env.PUBLIC_SECRET_PASSWORD;
+  const PUBLIC_URL_API = import.meta.env.PUBLIC_URL_API
+
+  
+  
 
   const [formData, setFormData] = useState({
     name: "",
@@ -15,17 +19,21 @@ function ContactForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonStatus("sending");
     try {
-      const response = await fetch("http://localhost:3000/send-email", {
+      const response = await fetch(PUBLIC_URL_API , {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           ownapikey: ownApiKey,
         },
         body: JSON.stringify({
+          email:formData.email,
           subject: `New email from ${formData.name} with email ${formData.email}`,
           html: formData.body,
         }),
@@ -35,7 +43,7 @@ function ContactForm() {
         setButtonStatus("error");
         throw new Error(`Error: ${response.status}`);
       }
-
+      
       const responseBody = await response.json();
       //   console.log('Respuesta del servidor:', responseBody);
       setButtonStatus("sent");
@@ -80,7 +88,7 @@ function ContactForm() {
               placeholder=" "
               value={formData.email.trim()}
               onChange={handleChange}
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              // pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
               required={true}
             />
             <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-white duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-accent">
