@@ -33,9 +33,7 @@ const weatherData = await response.json();
             {" "}
             Sky {weatherData.weather[0].main}{" "}
           </p>
-          <p class="serif xl:text-6xl">
-            {getHour()}h
-          </p>
+          <p class="serif xl:text-6xl" id="currentHour"></p>
         </div>
       </div>
     ) : (
@@ -62,6 +60,22 @@ const weatherData = await response.json();
       fill="none"></circle>
   </svg>
 </div>
+
+
+<script>
+  function updateHour() {
+    let now = new Date();
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    let hourStr = hour < 10 ? "0" + hour.toString() : hour.toString();
+    let minutesStr = minutes < 10 ? "0" + minutes.toString() : minutes.toString();
+    document.getElementById("currentHour").innerText = hourStr + ":" + minutesStr + "h";
+  }
+
+  updateHour();
+  setInterval(updateHour, 60000); // Update the hour every minute
+</script>
+
 
 <style>
   .weather-container {
