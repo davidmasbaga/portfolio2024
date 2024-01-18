@@ -5,13 +5,21 @@ export function kelvinToCelsius(kelvin: number): string {
 
 export function getHour(): string {
   let now = new Date();
-  let hora = now.getHours();
-  let minutos = now.getMinutes();
+  let offset = 1; // Ajuste de la zona horaria, por ejemplo, UTC+1
+  let hora = now.getUTCHours() + offset;
+  
+  // Ajustar si la hora pasa de 24
+  if (hora >= 24) {
+    hora -= 24;
+  }
+
+  let minutos = now.getUTCMinutes();
   let horaStr = hora < 10 ? "0" + hora.toString() : hora.toString();
   let minutosStr = minutos < 10 ? "0" + minutos.toString() : minutos.toString();
 
   return horaStr + ":" + minutosStr;
 }
+
 
 export function formatTime(time: string): string {
     const parts = time.split(':'); // Splits the string by ':'
