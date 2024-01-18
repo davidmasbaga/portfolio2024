@@ -1,5 +1,5 @@
 ---
-import { kelvinToCelsius, getHour } from "../../lib/utils";
+import { kelvinToCelsius } from "../../lib/utils";
 
 const weather_api_key = import.meta.env.WEATHER_API_KEY;
 
@@ -19,7 +19,9 @@ const weatherData = await response.json();
 
 <!-- Aquí escribes tu HTML -->
 <div class="weather-container">
-  {
+<div id="weatherDisplay"></div>
+
+  <!-- {
     weatherData ? (
       <div class="">
         <p class="serif xl:text-8xl tracking-normal mb-2">
@@ -39,7 +41,7 @@ const weatherData = await response.json();
     ) : (
       <p>Cargando datos...</p>
     )
-  }
+  } -->
 
   <svg class="circles" width="900" height="900" viewBox="0 0 200 200">
     <circle
@@ -63,6 +65,52 @@ const weatherData = await response.json();
 
 
 <script>
+
+async function fetchWeatherData() {
+    try {
+      const apiWeather = import.meta.env.PUBLIC_URL_API_WEATHER
+      const response = await fetch(apiWeather);
+      const weatherData = await response.json();
+      if (response.ok) {
+        displayWeatherData(weatherData);
+      } else {
+        throw new Error(weatherData.error);
+      }
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  }
+
+  function displayWeatherData(weatherData) {
+    if (weatherData) {
+      const weatherContainer = document.getElementById('weatherDisplay');
+      weatherContainer.innerHTML = `
+        <div class="">
+          <p class="serif xl:text-8xl tracking-normal mb-2">
+            Barcelona
+          </p>
+          <div class="flex gap-4 ">
+            <p class="serif xl:text-4xl">
+              ${kelvinToCelsius(weatherData.main.temp)}º
+            </p>
+            <p class="serif xl:text-4xl text-accent">
+              Sky ${weatherData.weather[0].main}
+            </p>
+            <p class="serif xl:text-5xl" id="currentHour"></p>
+          </div>
+        </div>
+      `;
+      updateHour();
+    }
+  }
+
+function kelvinToCelsius(kelvin){
+  const celsius = kelvin - 273.15;
+  return celsius.toFixed(1);
+
+}
+
+
   function updateHour() {
     let now = new Date();
     let hour = now.getHours();
@@ -72,7 +120,8 @@ const weatherData = await response.json();
     document.getElementById("currentHour").innerText = hourStr + ":" + minutesStr + "h";
   }
 
-  updateHour();
+ 
+  fetchWeatherData();
   setInterval(updateHour, 60000); // Update the hour every minute
 </script>
 
