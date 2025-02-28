@@ -1,8 +1,7 @@
 ---
 import { kelvinToCelsius } from "../../lib/utils";
 
-const weather_api_key = import.meta.env.WEATHER_API_KEY;
-
+const weather_api_key = import.meta.env.PUBLIC_WEATHER_API_KEY;
 const lat = "41.388";
 const lon = "2.1589";
 
@@ -69,6 +68,7 @@ const weatherData = await response.json();
 async function fetchWeatherData() {
     try {
       const apiWeather = import.meta.env.PUBLIC_URL_API_WEATHER
+    
       const response = await fetch(apiWeather);
       const weatherData = await response.json();
       if (response.ok) {
