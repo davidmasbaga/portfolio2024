@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Weather from "./Weather.astro";
+import davidHeroImage from "../../../public/david_hero.jpg"
 
 
 ---
@@ -22,7 +23,7 @@ import Weather from "./Weather.astro";
 </div>
 
 <div class="w-full flex justify-end">
-    <Image class='my-10 rounded-s-xl pr-5' src="https://media.licdn.com/dms/image/v2/D4D16AQEPcBg-teUe5A/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1699806897334?e=1746057600&v=beta&t=ZXEyMwTswibIamw6meUUfWUjgKjPl1-Ei2U8_VbcnWk" alt="Portfolio" width={900} height={300}/>  
+  <Image class="my-10 rounded-s-xl pr-5" src={davidHeroImage} alt="Portfolio Image" width="900" height="300" />
 </div>
 
 
