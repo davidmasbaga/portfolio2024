@@ -6,3 +6,7 @@
 
   font-family: 'Lora Variable', sans-serif;
 }
+
+.timeline-paragraph {
+  @apply serif text-base font-normal text-white ml-14 mr-14;
+}
