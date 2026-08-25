@@ -1,46 +1,8 @@
 ---
-import { kelvinToCelsius } from "../../lib/utils";
-
-const weather_api_key = import.meta.env.PUBLIC_WEATHER_API_KEY;
-const lat = "41.388";
-const lon = "2.1589";
-
-
-const response = await fetch(
-  `https://api.openweathermap.org/data/2.5/weather?lat=${
-    lat
-  }&lon=${lon}&appid=${weather_api_key}`
-);
-
-const weatherData = await response.json();
-// const weatherData=''
 ---
 
-<!-- Aquí escribes tu HTML -->
 <div class="weather-container">
-<div id="weatherDisplay"></div>
-
-  <!-- {
-    weatherData ? (
-      <div class="">
-        <p class="serif xl:text-8xl tracking-normal mb-2">
-          Barcelona
-        </p>
-        <div class="flex gap-4 ">
-          <p class="serif xl:text-4xl">
-            {kelvinToCelsius(weatherData.main.temp)}º{" "}
-          </p>
-          <p class="serif xl:text-4xl text-accent ">
-            {" "}
-            Sky {weatherData.weather[0].main}{" "}
-          </p>
-          <p class="serif xl:text-5xl" id="currentHour"></p>
-        </div>
-      </div>
-    ) : (
-      <p>Cargando datos...</p>
-    )
-  } -->
+  <div id="weatherDisplay" aria-live="polite"></div>
 
   <svg class="circles" width="900" height="900" viewBox="0 0 200 200">
     <circle
@@ -49,8 +11,15 @@ const weatherData = await response.json();
       r="90"
       stroke="gray"
       stroke-width="0.1"
-      fill="none"></circle>
-    <circle cx="80" cy="60" r="50" stroke="gray" stroke-width="0.5" fill="none"
+      fill="none"
+    ></circle>
+    <circle
+      cx="80"
+      cy="60"
+      r="50"
+      stroke="gray"
+      stroke-width="0.5"
+      fill="none"
     ></circle>
     <circle
       cx="120"
@@ -58,74 +27,63 @@ const weatherData = await response.json();
       r="60"
       stroke="#c8ff00"
       stroke-width="0.3"
-      fill="none"></circle>
+      fill="none"
+    ></circle>
   </svg>
 </div>
 
-
 <script>
-
-async function fetchWeatherData() {
-    try {
-      const apiWeather = import.meta.env.PUBLIC_URL_API_WEATHER
-    
-      const response = await fetch(apiWeather);
-      const weatherData = await response.json();
-      if (response.ok) {
-        displayWeatherData(weatherData);
-      } else {
-        throw new Error(weatherData.error);
-      }
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-    }
+  function kelvinToCelsius(kelvin) {
+    const celsius = kelvin - 273.15;
+    return celsius.toFixed(1);
   }
 
-  function displayWeatherData(weatherData: { main: { temp: any; }; weather: { main: any; }[]; }) {
-    if (weatherData) {
-      const weatherContainer = document.getElementById('weatherDisplay');
-      if (weatherContainer) {
-        weatherContainer.innerHTML = `
-        <div class="">
-          <p class="serif xl:text-8xl tracking-normal mb-2">
-            Barcelona
-          </p>
-          <div class="flex gap-4 ">
-            <p class="serif xl:text-4xl">
-              ${kelvinToCelsius(weatherData.main.temp)}º
-            </p>
-            <p class="serif xl:text-4xl text-accent">
-              Sky ${weatherData.weather[0].main}
-            </p>
+  function updateHour() {
+    const currentHour = document.getElementById("currentHour");
+    if (!currentHour) return;
+
+    const now = new Date();
+    const hour = now.getHours();
+    const minutes = now.getMinutes();
+    const hourStr = hour < 10 ? `0${hour}` : `${hour}`;
+    const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
+    currentHour.textContent = `${hourStr}:${minutesStr}h`;
+  }
+
+  async function fetchWeatherData() {
+    try {
+      const apiWeather = import.meta.env.PUBLIC_URL_API_WEATHER;
+      const response = await fetch(apiWeather);
+      const weatherData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(weatherData?.error || "Error fetching weather data");
+      }
+
+      const weatherContainer = document.getElementById("weatherDisplay");
+      if (!weatherContainer) return;
+
+      weatherContainer.innerHTML = `
+        <div>
+          <p class="serif xl:text-8xl tracking-normal mb-2">Barcelona</p>
+          <div class="flex gap-4">
+            <p class="serif xl:text-4xl">${kelvinToCelsius(weatherData.main.temp)}º</p>
+            <p class="serif xl:text-4xl text-accent">Sky ${weatherData.weather[0].main}</p>
             <p class="serif xl:text-5xl" id="currentHour"></p>
           </div>
         </div>
       `;
+
       updateHour();
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
     }
   }
 
-function kelvinToCelsius(kelvin: number){
-  const celsius = kelvin - 273.15;
-  return celsius.toFixed(1);
-
-}
-
-
-  function updateHour() {
-    let now = new Date();
-    let hour = now.getHours();
-    let minutes = now.getMinutes();
-    let hourStr = hour < 10 ? "0" + hour.toString() : hour.toString();
-    let minutesStr = minutes < 10 ? "0" + minutes.toString() : minutes.toString();
-    document.getElementById("currentHour").innerText = hourStr + ":" + minutesStr + "h";
-  }
-
- 
   fetchWeatherData();
-  setInterval(updateHour, 60000); // Update the hour every minute
+  setInterval(updateHour, 60000);
 </script>
-
 
 <style>
   .weather-container {
@@ -141,12 +99,8 @@ function kelvinToCelsius(kelvin: number){
   }
 
   @media (max-width: 1279px) {
-    .weather-container  {
+    .weather-container {
       display: none;
     }
- 
-  
-    
   }
-
 </style>
