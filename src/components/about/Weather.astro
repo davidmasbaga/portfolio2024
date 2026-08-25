@@ -81,10 +81,11 @@ async function fetchWeatherData() {
     }
   }
 
-  function displayWeatherData(weatherData) {
+  function displayWeatherData(weatherData: { main: { temp: any; }; weather: { main: any; }[]; }) {
     if (weatherData) {
       const weatherContainer = document.getElementById('weatherDisplay');
-      weatherContainer.innerHTML = `
+      if (weatherContainer) {
+        weatherContainer.innerHTML = `
         <div class="">
           <p class="serif xl:text-8xl tracking-normal mb-2">
             Barcelona
@@ -104,7 +105,7 @@ async function fetchWeatherData() {
     }
   }
 
-function kelvinToCelsius(kelvin){
+function kelvinToCelsius(kelvin: number){
   const celsius = kelvin - 273.15;
   return celsius.toFixed(1);
 

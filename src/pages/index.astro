@@ -10,6 +10,7 @@ import TimeLine from "../components/TimeLine.astro";
 import Portfolio from "../components/portfolio/Portfolio.astro"
 import SkillsArea from "../components/about/SkillsArea.astro";
 import Social from "../components/about/Social.astro";
+import ContactoNoForm from "../components/ContactoNoForm.astro";
 
 
 const hero= 'div'
@@ -51,7 +52,8 @@ const hero= 'div'
       <p class="panel-tag font-semibold tracking-wider text-white ">CONTACT</p>
       <div class="content">
        
-      <Contact client:load/>
+      <!-- <Contact client:load/> -->
+       <ContactoNoForm/>
       <Social/>
       </div>
     </div>
